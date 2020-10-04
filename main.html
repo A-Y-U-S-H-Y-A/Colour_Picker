@@ -1,0 +1,111 @@
+<html>
+<head>
+<style>
+body{
+background-image:url("back.jpg");
+background-width:100%;
+color:white;
+font-family: Arial, Helvetica, sans-serif;
+font-size:120%;
+line-height:120%;
+}
+h1{
+font-size:250%;
+text-align:center;
+}
+h3{
+font-size:150%;
+}
+.btn{
+padding:0.4% 0.6%;
+border:1px solid white;
+border-radius:10px;
+color:white;
+background: #FF5F6D;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #FFC371, #FF5F6D);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #FFC371, #FF5F6D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+</style>
+</head>
+<body>
+<!-- Red Green Blue Yellow Orange Black White Purple Brown -->
+<form>
+<div id="first">
+<h1>Perfect colour</h1><br>
+<h3>Choose the emotions you want yor website to display</h3>
+<input type="checkbox" id="organic_natural">Organic/Natural<br>
+<input type="checkbox" id="wealth">Wealth<br>
+<input type="checkbox" id="royalty">Royalty<br>
+<input type="checkbox" id="energitic">Energitic<br>
+<input type="checkbox" id="passionate">Passionate<br>
+<input type="checkbox" id="confidence">Confidence<br>
+<input type="checkbox" id="peace_relaxing">Peace / Relaxing<br>
+<input type="checkbox" id="trust">Trust<br>
+<input type="checkbox" id="saftey">Saftey<br>
+<input type="checkbox" id="warmth">Warmth<br>
+<input type="checkbox" id="happiness">Happiness<br>
+<input type="checkbox" id="creativity">Creativity<br>
+<input type="checkbox" id="friendliness">Friendliness<br>
+<input type="checkbox" id="cheerfullness">Cheerfulness<br><br>
+<input class="btn" type="button" onclick="next();" value="Find the colours">
+</div>
+<div style="display:none;" id="Res">
+<h1>Colours suggested</h1>
+<h2 id="thecolor"></h2>
+<input type="button" onclick="pall();" class="btn" value="View Palates">
+</div>
+</form>
+<script>
+var sc;
+var len;
+function getKeyByValue(object, value) {
+	return Object.keys(object).filter(key => object[key] === value); 
+}
+function next(){
+//Red Green Blue Yellow Orange Black White Purple Brown
+var colour={"red":0,"green":0,"blue":0,"yellow":0,"orange":0,"black":0,"white":0,"purple":0,"brown":0,};
+
+
+if(document.getElementById("organic_natural").checked == true){colour["green"]+=1;colour["brown"]+=1;}
+
+if(document.getElementById("wealth").checked == true){colour["purple"]+=1;colour["green"]+=1;colour["blue"]+=1;}
+
+if(document.getElementById("royalty").checked == true){colour["purple"]+=1;colour["black"]+=1;}
+
+if(document.getElementById("energitic").checked == true){colour["red"]+=1;colour["black"]+=1;}
+
+if(document.getElementById("passionate").checked == true){colour["red"]+=1;}
+
+if(document.getElementById("confidence").checked == true){colour["red"]+=1;}
+
+if(document.getElementById("peace_relaxing").checked == true){colour["green"]+=1;}
+
+if(document.getElementById("trust").checked == true){colour["blue"]+=1;}
+if(document.getElementById("saftey").checked == true){colour["blue"]+=1;}
+if(document.getElementById("warmth").checked == true){colour["yellow"]+=1;colour["red"]+=1;}
+if(document.getElementById("happiness").checked == true){colour["yellow"]+=1;}
+if(document.getElementById("creativity").checked == true){colour["yellow"]+=1;}
+if(document.getElementById("friendliness").checked == true){colour["yellow"]+=1;}
+if(document.getElementById("cheerfullness").checked == true){colour["yellow"]+=1;colour["red"]+=1;}
+
+var arr = Object.values(colour);
+var max = Math.max(...arr);
+sc = getKeyByValue(colour,max);
+len = sc.length;
+for(var i=0;i<len;i++){
+sc[i]= sc[i].charAt(0).toUpperCase() + sc[i].substr(1);
+}
+document.getElementById("thecolor").innerHTML = sc;
+document.getElementById("first").style.display = "none";
+document.getElementById("Res").style.display = "block";
+}
+
+function pall(){
+for(i=0;i<len;i++){
+var t = 'https://colorhunt.co/palettes/' + sc[i];
+window.open(t);
+}
+}
+</script>
+</body>
+</html>
